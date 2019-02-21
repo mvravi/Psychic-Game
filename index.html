@@ -1,0 +1,89 @@
+<!Doctype html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <title>Psychic Game</title>
+</head>
+
+<body>
+  <div class="container">
+       <h1>Guess What letter I am thinking (a-z)</h1>
+        <p>Win : <span id = "wins"></span></p>
+        <p>Tries : <span id="tries"></span></p>
+        <p>Your Guess : <span id="guess"></span></p>
+
+        <div id="scriptblock">
+
+            <script>
+
+                // var alphaarr = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+                // var arrstring = "";
+//                var answer='u';
+                var guess = "";
+                var tries=0, wins = 0, guessRemaining = 0;
+                
+ 
+                
+            //function to capture user's keyboard input and make the input lowercase
+            document.onkeydown = function(event) {
+                var userEntered = (String.fromCharCode(event.keyCode)).toLowerCase();
+                console.log("Inside the key press : " + userEntered);
+                document.getElementById("guess").innerHTML = document.getElementById("guess").innerHTML+ "," + userEntered;
+                //guess.push(userEntered);
+                console.log("Span VAlue" + document.getElementById("guess").innerHTML);
+                guess = userEntered;
+
+                //Check whether character entered is equal to what is expected
+                IsMatched();
+            }
+
+
+            function resetVariables(){
+              guess = "";
+              tries=0; wins = 0; guessRemaining = 10;
+            }
+
+            function generateRandonChar(){
+              randomchar = String.fromCharCode(Math.round(Math.random() * 26) + 97);
+              console.log("Computer Guess Random : " + randomchar);
+            }
+
+
+            function IsMatched(){
+
+              console.log("inside the isMatched function");
+              console.log("computer guessed : " + randomchar);
+              console.log("your guess -- " + guess);
+              if (randomchar === guess){
+               document.getElementById("wins").innerHTML = parseInt(wins) + 1;
+              }
+              else{
+                tries = parseInt(tries) + 1;
+              document.getElementById("tries").innerHTML = tries;
+              console.log("your guess was wrong " + tries);
+              }
+           } //end of funtion checkMatched()
+
+          
+          
+          //MAIN PROGRAM STARTS HERE program starts here
+
+          //Initialize variables
+          resetVariables();
+
+          //generate Random character
+          generateRandonChar();
+
+          console.log("computer guessed : " + randomchar);
+          console.log("your tries : " + tries);
+          console.log("guessremaining : " + guessRemaining);
+  
+            </script>
+        </div>
+   </div>
+
+</body>
+</html>
